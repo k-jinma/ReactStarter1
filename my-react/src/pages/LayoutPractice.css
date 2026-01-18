@@ -1,0 +1,23 @@
+.lp-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.lp-area {
+  padding: 24px;
+  font-size: 24px;
+}
+
+.lp-header {
+  background: #ffdddd;
+}
+
+.lp-main {
+  background: #ddffdd;
+  flex: 1;
+}
+
+.lp-footer {
+  background: #ddddff;
+}
