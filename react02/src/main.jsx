@@ -8,8 +8,8 @@ import StateBasic from './StateBasic.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <MyHello myName="鈴木" />
-    <EventBasic param="a" />
-
-    <StateBasic />
+    <EventBasic a="0" />
+    <StateBasic a="0" />
+    <StateBasic a={0} />
   </StrictMode>,
 );

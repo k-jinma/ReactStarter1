@@ -1,10 +1,13 @@
+import { useState } from "react";
 
-export default function StateBasic(){
-    let counter = 0;
+export default function StateBasic({a}){
+    console.log(a);
+    //let counter = 0;
+    const [counter, setCounter] = useState(a);
 
     const countUp = () => {
         console.log(counter);
-        counter++;
+        setCounter(counter + 1); //Reactの状態はsetCounter関数を使って更新しなければならない
     }
     return(
         <>
