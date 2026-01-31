@@ -5,6 +5,11 @@ import App from './App.jsx'
 import StylePanel from './StyledPanel.jsx'
 import TitledPanel from './TitledPanel.jsx'
 import StateBasic from './stateBasic.jsx'
+import EventMouse from './assets/EventMouse.jsx'
+import tea1 from './assets/tea1.png'
+import tea2 from './assets/tea2.png'
+import EventObj from './EventObj.jsx'
+import EventKey from './EventKey.jsx'
 
 const title = <p>メンバー募集中</p>
 const body = <p>詳しくはお問い合わせください</p>
@@ -31,6 +36,22 @@ createRoot(document.getElementById('root')).render(
     <br />
     
     <StateBasic a={0} />
+
+    <br />
+
+    <EventMouse
+      alt="ロゴ画像"
+      defaultSrc={tea1}
+      afterSrc={tea2}
+    />
+
+    <br />
+
+    <EventObj />
+
+    <br />
+
+    <EventKey />
 
   </StrictMode>,
 )
