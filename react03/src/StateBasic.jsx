@@ -7,10 +7,9 @@ export default function StateBasic({a}){
 
     const countUp = () => {
         setCounter(counter => counter + 1 );
-        setCounter(counter => counter + 1 ); //Reactの状態はsetCounter関数を使って更新しなければならない
-
-
+        setCounter(counter => counter + 1 ); // =>を使って複数回更新できるようにする
     }
+    
     return(
         <>
             <p>StateBasicコンポーネント</p>
