@@ -1,4 +1,21 @@
+import { useState } from "react";
+
 export default function StateForm(){
+    
+    const [form, setForm] = useState({
+        name: '',
+        age: ''
+    })
+
+    const onClick = e => {
+        const obj = {
+            name: e.target.form[0].value,
+            age: e.target.form[1].value
+        }
+        setForm(obj)
+
+    }
+
     return (
         <form>
             <div>
@@ -10,9 +27,9 @@ export default function StateForm(){
                 <input id="age" name="age" type="number" />
             </div>
             <div>
-                <button type="button">送信</button>
+                <button type="button" onClick={onClick}>送信</button>
             </div>
-            <p>こんにちは、〇〇（〇〇歳）さん！</p>
+            <p>こんにちは、{form.name}（{form.age}歳）さん！</p>
         </form>
     )
 }
