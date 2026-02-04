@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function StateForm(){
     
+    // 初期値はオブジェクトとする
     const [form, setForm] = useState({
         name: '',
         age: ''
