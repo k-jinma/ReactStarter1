@@ -8,7 +8,7 @@ export default function StateForm(){
         age: ''
     })
 
-    const onClick = e => {
+    const onClick = e => { //(e)は()内が１つの引数の場合だと()は省略可能
         const obj = {
             name: e.target.form[0].value,
             age: e.target.form[1].value
@@ -16,6 +16,12 @@ export default function StateForm(){
         setForm(obj)
 
     }
+
+    // const onClick = (e) => {
+    //     const formName = e.target.value
+    //     const formAge = e.target.value
+    // }
+
 
     return (
         <form>
