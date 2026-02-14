@@ -29,11 +29,11 @@ export default function StateForm(){
         <form>
             <div>
                 <label htmlFor={`${id}-name`}>名前:</label>
-                <input id={`${id}-name`} name="name" type="text" />
+                <input id={`${id}-name`} name="name" type="text" onChange={onClick}/>
             </div>
             <div>
                 <label htmlFor={`${id}-age`}>年齢:</label>
-                <input id={`${id}-age`} name="age" type="number" />
+                <input id={`${id}-age`} name="age" type="number" onChange={onClick}/>
             </div>
             <div>
                 <button type="button" onClick={onClick}>送信</button>
