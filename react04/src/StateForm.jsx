@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 
 export default function StateForm(){
+
+    const id = useId();
     
     // 初期値はオブジェクトとする
     const [form, setForm] = useState({
@@ -26,12 +28,12 @@ export default function StateForm(){
     return (
         <form>
             <div>
-                <label htmlFor="name">名前:</label>
-                <input id="name" name="name" type="text" />
+                <label htmlFor={`${id}-name`}>名前:</label>
+                <input id={`${id}-name`} name="name" type="text" />
             </div>
             <div>
-                <label htmlFor="age">年齢:</label>
-                <input id="age" name="age" type="number" />
+                <label htmlFor={`${id}-age`}>年齢:</label>
+                <input id={`${id}-age`} name="age" type="number" />
             </div>
             <div>
                 <button type="button" onClick={onClick}>送信</button>
