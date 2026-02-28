@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-export default function CountLogger() {
+export default function CountTest() {
     const [count, setCount] = useState(0);
 
     const handleClick = () => {

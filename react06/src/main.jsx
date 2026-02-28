@@ -1,10 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import StateEffect from './StateEffect.jsx'
+import CountTest from './CountTest.jsx'
+import BadTimer from './BadTimer.jsx'
+import GoodTimer from './GoodTimer.jsx'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <StateEffect />
+    <CountTest />
+    {/* <Counter /> */}
+    {/* <BadTimer /> */}
+    {/* <GoodTimer /> */}
   </StrictMode>,
 )
