@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useState, useEffect } from 'react';
 
 export default function CountLogger() {
     const [count, setCount] = useState(0);
