@@ -1,4 +1,5 @@
 // src/pages/SearchPage.jsx
+import { useNavigate } from 'react-router-dom';
 
 // ダミーデータ（表示の確認用）
 const dummyMovies = [
@@ -8,6 +9,8 @@ const dummyMovies = [
 ];
 
 function SearchPage() {
+  const navigate = useNavigate();  // ← 追加
+
   return (
     <div>
       {/* 検索バー */}
@@ -19,7 +22,7 @@ function SearchPage() {
       {/* 映画一覧 */}
       <div className="movie-grid">
         {dummyMovies.map((movie) => (
-          <div key={movie.id} className="movie-card">
+          <div key={movie.id} className="movie-card" onClick={() => navigate(`/movie/${movie.id}`)}>
             <img src="https://via.placeholder.com/300x450?text=No+Image" alt={movie.title} />
             <div className="movie-card-info">
               <h3>{movie.title}</h3>
