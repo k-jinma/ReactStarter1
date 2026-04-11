@@ -1,41 +1,67 @@
 // src/pages/MovieDetail.jsx
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const dummyMovie = {
-  title: 'トップガン マーヴェリック',
-  tagline: '不可能な任務がまた始まる',
-  vote_average: 8.3,
-  release_date: '2022-05-27',
-  runtime: 130,
-  genres: [{ id: 1, name: 'アクション' }, { id: 2, name: 'ドラマ' }],
-  overview: 'マーヴェリックはトップガンのパイロットとしてスペシャリストの地位を楽しんでいたが、やがて危険なミッションへと導かれる。',
-  poster_path: null,
-};
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY; 
+
 
 function MovieDetail() {
+  const { movieId } = useParams();
   const navigate = useNavigate();
-  const posterUrl = 'https://via.placeholder.com/500x750?text=No+Image';
+
+  // ← 追加：ダミーデータの代わりにstateで管理
+  const [movie, setMovie] = useState(null);            // 取得した映画データ
+  const [isLoading, setIsLoading] = useState(true);    // 読み込み中かどうか
+  const [error, setError] = useState(null);            // エラーメッセージ
+
+    // ← 追加：ページ表示時に自動でAPIを呼び出す
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=ja-JP`
+        );
+        const data = await response.json();
+        setMovie(data);                                // 取得データをstateに格納
+      } catch (_err) {
+        setError('映画情報の取得に失敗しました');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchMovie();
+  }, [movieId]);  // movieIdが変わるたびに再実行
+
+  // ← 追加：状態に応じて表示を切り替え
+  if (isLoading) return <p className="message">読み込み中...</p>;
+  if (error) return <p className="message error">{error}</p>;
+  if (!movie) return null;
+
+  // ← 書き換え：ダミーのposterUrlをAPIのデータから組み立てる
+  const posterUrl = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    : 'https://via.placeholder.com/500x750?text=No+Image';
 
   return (
     <div className="movie-detail">
       <button className="back-button" onClick={() => navigate(-1)}>← 戻る</button>
       <div className="detail-content">
-        <img src={posterUrl} alt={dummyMovie.title} className="detail-poster" />
+        <img src={posterUrl} alt={movie.title} className="detail-poster" />
         <div className="detail-info">
-          <h2>{dummyMovie.title}</h2>
-          <p className="tagline">{dummyMovie.tagline}</p>
+          <h2>{movie.title}</h2>
+          {movie.tagline && <p className="tagline">{movie.tagline}</p>}
           <div className="detail-meta">
-            <span>⭐ {dummyMovie.vote_average}</span>
-            <span>{dummyMovie.release_date.slice(0, 4)}年</span>
-            <span>{dummyMovie.runtime}分</span>
+            <span>⭐ {movie.vote_average?.toFixed(1)}</span>
+            <span>{movie.release_date.slice(0, 4)}年</span>
+            <span>{movie.runtime}分</span>
           </div>
           <div className="genres">
-            {dummyMovie.genres.map((genre) => (
+            {movie.genres?.map((genre) => ( 
               <span key={genre.id} className="genre-tag">{genre.name}</span>
             ))}
           </div>
           <h3>あらすじ</h3>
-          <p>{dummyMovie.overview}</p>
+          <p>{movie.overview || 'あらすじ情報がありません'}</p> 
         </div>
       </div>
     </div>

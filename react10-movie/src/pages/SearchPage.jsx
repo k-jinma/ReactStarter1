@@ -12,11 +12,13 @@ function SearchPage() {
   const [movies, setMovies] = useState([]);        // ← 追加：検索結果の映画一覧
   const [error, setError] = useState(null);               // ← 追加：エラーメッセージ
   const [hasSearched, setHasSearched] = useState(false);  // ← 追加：一度でも検索したか
+  const [isLoading, setIsLoading] = useState(false);      // ← 追加：検索中かどうか
 
   const searchMovies = async () => {
     if (!keyword.trim()) return;
     setError(null);               // ← 追加：前回のエラーをリセット
     setHasSearched(true);         // ← 追加：「検索した」フラグをON
+    setIsLoading(true);            // ← 追加：検索開始 → ローディングON
 
     try{
       // 1. APIのURLを組み立てる
@@ -39,6 +41,8 @@ function SearchPage() {
     // err変数を使わないことを明示する（アンダースコアで慣例的に「意図的に未使用」を示す）
     }catch (_err) {
       setError('映画データの取得に失敗しました。ネットワークを確認してください。');
+    }finally {
+      setIsLoading(false);         // ← 追加：検索終了 → ローディングOFF（成否関わらず）
     }
   };
 
@@ -50,6 +54,13 @@ function SearchPage() {
         <input type="text" value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="映画タイトルを入力..." />
         <button onClick={searchMovies}>検索</button>
       </div>
+
+      {/* ← 追加：検索中のローディング表示 */}
+      {isLoading && <p className="message">検索中...</p>}
+      {error && <p className="message error">{error}</p>}
+      {!isLoading && !error && hasSearched && movies.length === 0 && (
+        <p className="message">映画が見つかりませんでした</p>
+      )}
 
       {/* 映画一覧 */}
       <div className="movie-grid">
