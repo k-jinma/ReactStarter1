@@ -1,0 +1,32 @@
+/* src/App.css */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; background-color: #1a1a2e; color: #eee; }
+.app { max-width: 900px; margin: 0 auto; padding: 20px; }
+.app h1 { text-align: center; margin-bottom: 24px; font-size: 28px; }
+.search-bar { display: flex; gap: 8px; margin-bottom: 24px; }
+.search-bar input { flex: 1; padding: 12px 16px; border: none; border-radius: 8px; font-size: 16px; background: #16213e; color: #eee; }
+.search-bar input::placeholder { color: #888; }
+.search-bar button { padding: 12px 24px; border: none; border-radius: 8px; background-color: #e94560; color: #fff; font-size: 16px; cursor: pointer; }
+.search-bar button:hover { background-color: #c73650; }
+.message { text-align: center; padding: 40px 0; color: #888; font-size: 16px; }
+.message.error { color: #e94560; }
+.movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+.movie-card { cursor: pointer; border-radius: 8px; overflow: hidden; background: #16213e; transition: transform 0.2s; }
+.movie-card:hover { transform: translateY(-4px); }
+.movie-card img { width: 100%; display: block; }
+.movie-card-info { padding: 12px; }
+.movie-card-info h3 { font-size: 14px; margin-bottom: 4px; }
+.movie-card-info p { font-size: 12px; color: #888; }
+.back-button { padding: 8px 16px; border: 1px solid #555; border-radius: 8px; background: transparent; color: #eee; font-size: 14px; cursor: pointer; margin-bottom: 20px; }
+.back-button:hover { background: #16213e; }
+.detail-content { display: flex; gap: 24px; }
+.detail-poster { width: 300px; border-radius: 8px; }
+.detail-info { flex: 1; }
+.detail-info h2 { font-size: 28px; margin-bottom: 8px; }
+.tagline { color: #888; font-style: italic; margin-bottom: 16px; }
+.detail-meta { display: flex; gap: 16px; margin-bottom: 16px; color: #ccc; }
+.genres { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.genre-tag { background: #e94560; padding: 4px 12px; border-radius: 16px; font-size: 12px; }
+.detail-info h3 { margin-bottom: 8px; font-size: 18px; }
+.detail-info p { line-height: 1.8; color: #ccc; }
+@media (max-width: 600px) { .detail-content { flex-direction: column; } .detail-poster { width: 100%; } }
