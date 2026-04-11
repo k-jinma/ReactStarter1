@@ -10,25 +10,38 @@ function SearchPage() {
 
   const [keyword, setKeyword] = useState('');      // ← 追加：入力中のキーワード
   const [movies, setMovies] = useState([]);        // ← 追加：検索結果の映画一覧
-
+  const [error, setError] = useState(null);               // ← 追加：エラーメッセージ
+  const [hasSearched, setHasSearched] = useState(false);  // ← 追加：一度でも検索したか
 
   const searchMovies = async () => {
-    // 1. APIのURLを組み立てる
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=トップガン&language=ja-JP`;
+    if (!keyword.trim()) return;
+    setError(null);               // ← 追加：前回のエラーをリセット
+    setHasSearched(true);         // ← 追加：「検索した」フラグをON
 
-    // 2. fetchでリクエストを送る
-    const response = await fetch(url);
+    try{
+      // 1. APIのURLを組み立てる
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${keyword}&language=ja-JP`;
 
-    // 3. レスポンスをJSONに変換する
-    const data = await response.json();
+      // 2. fetchでリクエストを送る
+      const response = await fetch(url);
 
-    // 4. 受け取ったデータをコンソールで確認
-    console.log(data);          // APIレスポンス全体
-    console.log(data.results);  // 映画の配列
-    console.log(data.results[0]); // 先頭1件のデータ
+      // 3. レスポンスをJSONに変換する
+      const data = await response.json();
 
-    setMovies(data.results); 
+      // 4. 受け取ったデータをコンソールで確認
+      console.log(data);          // APIレスポンス全体
+      console.log(data.results);  // 映画の配列
+      console.log(data.results[0]); // 先頭1件のデータ
+      
+
+      setMovies(data.results);
+
+    // err変数を使わないことを明示する（アンダースコアで慣例的に「意図的に未使用」を示す）
+    }catch (_err) {
+      setError('映画データの取得に失敗しました。ネットワークを確認してください。');
+    }
   };
+
 
   return (
     <div>
